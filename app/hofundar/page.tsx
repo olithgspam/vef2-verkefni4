@@ -5,7 +5,6 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { fetchAuthorsAction, createAuthorAction, deleteAuthorAction } from '../skra-frett/actions';
 
-
 export default function AuthorsPage() {
   const [authors, setAuthors] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -67,7 +66,7 @@ export default function AuthorsPage() {
           &larr; Forsíða
         </Link>
         
-        <h1 className="text-4xl font-extrabold mb-8 bg-gradient-to-r from-white to-amber-500 bg-clip-text text-transparent italic">
+        <h1 className="text-4xl font-extrabold mb-8 bg-gradient-to-r from-white to-amber-500 bg-clip-text text-transparent italic text-center">
           Umsjón höfunda
         </h1>
 
@@ -79,7 +78,10 @@ export default function AuthorsPage() {
         </form>
 
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold mb-6">Skráðir höfundar</h2>
+          <div className="flex justify-between items-end mb-6">
+            <h2 className="text-2xl font-bold">Skráðir höfundar</h2>
+            
+          </div>
           
           {Array.isArray(authors) && authors.length > 0 ? (
             authors.map(a => (

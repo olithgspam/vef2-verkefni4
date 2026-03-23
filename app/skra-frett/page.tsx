@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
-import { createNewsItem } from './actions';
+import { createNewsItem, fetchAuthorsAction } from './actions';
 
 export default function CreateNewsPage() {
   const [error, setError] = useState<string | null>(null);
@@ -13,18 +13,20 @@ export default function CreateNewsPage() {
   const [authors, setAuthors] = useState<{id: number, name: string}[]>([]);
 
   useEffect(() => {
-    async function fetchAuthors() {
+    async function getAuthors() {
       try {
-        const res = await fetch('https://verkefni.gold/authors');
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        setAuthors(data);
+        const data = await fetchAuthorsAction();
+        
+        if (Array.isArray(data)) {
+          setAuthors(data);
+        } else {
+          console.error("Djöfull, API-ið skilaði ekki fylki:", data);
+        }
       } catch (err) {
-        console.log("CORS eða tengivilla, sýnum prufu höfund");
-        setAuthors([{id: 1, name: "Aðalhöfundur"}]); 
+        console.error("Gat ekki sótt höfunda í dropdown:", err);
       }
     }
-    fetchAuthors();
+    getAuthors();
   }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -87,7 +89,7 @@ export default function CreateNewsPage() {
               <textarea name="content" rows={5} required className="p-4 rounded-xl bg-black border border-white/20 text-white focus:border-amber-500 outline-none"></textarea>
             </div>
 
-            <Button pending={loading}>Skrá frétt strax</Button>
+            <Button pending={loading}>Birta frétt</Button>
           </form>
         </div>
       </div>
