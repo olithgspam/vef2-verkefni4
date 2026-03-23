@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nýjustu Fréttir | Fréttavefurinn",
+  title: "Nýjustu Fréttir",
   description: "Nútímalegur íslenskur fréttavefur",
   icons: {
     icon: [
