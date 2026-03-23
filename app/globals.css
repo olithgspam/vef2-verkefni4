@@ -24,3 +24,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes warp-liquid {
+  0% {
+    background-position: 0% 0%;
+    background-size: 100% 100%;
+  }
+  25% {
+    background-position: 100% 50%;
+    background-size: 350% 250%;
+  }
+  50% {
+    background-position: 100% 100%;
+    background-size: 100% 100%;
+  }
+  75% {
+    background-position: 0% 50%;
+    background-size: 200% 200%;
+  }
+  100% {
+    background-position: 0% 0%;
+    background-size: 100% 100%;
+  }
+}
+
+.animate-liquid {
+  animation: warp-liquid 35s ease-in-out infinite alternate !important;
+}
